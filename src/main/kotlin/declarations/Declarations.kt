@@ -26,8 +26,34 @@ fun main() {
     }
 //    number = "hello" type is different
 
+    val employeeOne = Employee("Ronaldo", 1)
+    val employeeTwo = Employee("Messi", 2)
+    val employeeThree = Employee("Messi", 2)
+    println(employeeOne == employeeTwo)
+    println(employeeTwo == employeeThree) // true : Kotlin the equals operator checks for structural equality when it's comparing instances,
+    println(employeeOne.equals(employeeTwo)) // equals function can be replace by ==
+    println(employeeTwo.equals(employeeThree))
+
+    println(employeeOne === employeeTwo)   // === : check referential equality check
+    println(employeeTwo === employeeThree)
+
+    val employeeFour = employeeThree
+    println(employeeFour === employeeThree)
+
+    println(employeeFour != employeeTwo)
+    println(employeeFour !== employeeTwo)
+    println(employeeTwo != employeeThree)
+    println(employeeTwo !== employeeThree)
+
 }
 
 class Employee(var name: String, val id: Int) {
 
+    override fun equals(obj: Any?): Boolean {
+        if (obj is Employee) {
+            return name == obj.name && id == obj.id
+        }
+
+        return false
+    }
 }

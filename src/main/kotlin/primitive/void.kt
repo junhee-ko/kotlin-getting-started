@@ -1,0 +1,5 @@
+package primitive
+
+fun f() {
+
+}

@@ -21,19 +21,19 @@ fun props() {
     listOf(1, 2, 3).penultimate
 }
 
-interface List<T> {
+interface MyList<T> {
 
     operator fun get(index: Int): T
 }
 
-class StringList : List<String> {
+class StringList : MyList<String> {
 
     override fun get(index: Int): String {
         TODO("Not yet implemented")
     }
 }
 
-class ArrayList<T> : List<T> {
+class ArrayList<T> : MyList<T> {
     override fun get(index: Int): T {
         TODO("Not yet implemented")
     }
@@ -53,4 +53,27 @@ class Processor<T : Any> {
 fun processorTest() {
     val processor = Processor<String>()
     processor.process("jko")
+}
+
+fun <T> print(list: List<T>) {
+
+//    if (list is List<String>) {
+//        println("list is List<String>")
+//    }
+
+    if (list is List<*>) {
+
+    }
+}
+
+inline fun <reified T> isA(value: Any) = value is T
+
+fun isATest(){
+    val isAString1 : Boolean = isA<String>("abc")
+    val isAString2 : Boolean = isA<String>(123)
+}
+
+fun testFilterIsInstance(){
+    val list = listOf("junhee", 123)
+    val filteredList: List<String> = list.filterIsInstance<String>()
 }
